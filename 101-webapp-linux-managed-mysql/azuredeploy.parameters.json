@@ -2,14 +2,14 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {   
-    "siteName": {
-      "value": "GEN-UNIQUE"
+    "databaseName": {
+      "value": "vitotestmysql01"
     }, 
     "administratorLogin": {
-      "value": "ci99265b426"
+      "value": "mysqladmin"
     },
     "administratorLoginPassword": {
-      "value": "GEN-PASSWORD"
+      "value": "MyseQret.1234"
     }
   }
 }
