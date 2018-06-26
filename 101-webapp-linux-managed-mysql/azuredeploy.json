@@ -2,7 +2,7 @@
   "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "databaseName":{
+    "databaseName": {
       "type": "string",
       "metadata": {
         "description": "MySQL Database name"
@@ -63,12 +63,11 @@
     }
   },
   "variables": {
-    "databaseName": "[concat(parameters('databaseName'))]",
     "serverName": "[concat(parameters('databaseName'), 'mysqlserver')]"
   },
   "resources": [
     {
-      "apiVersion": "2017-12-01-preview",
+      "apiVersion": "2017-12-01",
       "location": "[resourceGroup().location]",
       "name": "[variables('serverName')]",
       "type": "Microsoft.DBforMySQL/servers",
@@ -94,9 +93,9 @@
       "resources": [
         {
           "type": "firewallRules",
-          "apiVersion": "2017-12-01-preview",
+          "apiVersion": "2017-12-01",
           "dependsOn": [
-            "[concat('Microsoft.DBforMySQL/servers/', variables('serverName'),'/databases/' , variables('databaseName'))]",
+            "[concat('Microsoft.DBforMySQL/servers/', variables('serverName'),'/databases/' , parameters('databaseName'))]",
             "[concat('Microsoft.DBforMySQL/servers/', variables('serverName'))]"
           ],
           "location": "[resourceGroup().location]",
@@ -107,9 +106,9 @@
           }
         },
         {
-          "name": "[variables('databaseName')]",
+          "name": "[parameters('databaseName')]",
           "type": "databases",
-          "apiVersion": "2017-12-01-preview",
+          "apiVersion": "2017-12-01",
           "properties": {
             "charset": "utf8",
             "collation": "utf8_general_ci"
@@ -118,6 +117,7 @@
             "[concat('Microsoft.DBforMySQL/servers/', variables('serverName'))]"
           ]
         }
+    
       ]
     }
   ]
