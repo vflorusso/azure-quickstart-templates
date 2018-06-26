@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "redisCacheName": {
-            "value": "GEN-UNIQUE"
+            "value": "vitotestredis02"
         },
-        "existingDiagnosticsStorageAccountId": {
-            "value": "GET-PREREQ-existingDiagnosticsStorageAccountId"
+        "redisCacheCapacity":{
+            "value": 1
         }
     }
 }
