@@ -14,6 +14,13 @@
       "metadata": {
         "description": "The name of the existing subnet."
       }
+    },
+    "addressPrefix": {
+      "type": "string",
+      "defaultValue": "10.16.0.0/16",
+      "metadata": {
+        "description": "The address prefix of the axisting subnet."
+      }
     }
   },
   "variables": {
@@ -25,12 +32,13 @@
       "dependsOn": [
         "[concat('Microsoft.Network/networkSecurityGroups/',variables('nsgName'))]"
       ],
-      "apiVersion": "2017-10-01",
+      "apiVersion": "2018-06-01",
       "name": "[concat(parameters('virtualNetworkName'), '/', parameters('subnetName'))]",
       "location": "[resourceGroup().location]",
       "properties": {
+        "addressPrefix": "[parameters('addressPrefix')]",
         "networkSecurityGroup": {
-          "id": "[concat('Microsoft.Network/networkSecurityGroups/',variables('nsgName'))]"
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/',variables('nsgName'))]"
         }
       }
     },
@@ -38,7 +46,7 @@
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('nsgName')]",
       "location": "[resourceGroup().location]",
-      "apiVersion": "2017-10-01",
+      "apiVersion": "2018-06-01",
       "properties": {
         "securityRules": [
           {
@@ -65,7 +73,7 @@
               "sourceAddressPrefix": "*",
               "destinationAddressPrefix": "*",
               "access": "Allow",
-              "priority": 100,
+              "priority": 101,
               "direction": "Inbound"
             }
           }
